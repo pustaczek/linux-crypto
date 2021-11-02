@@ -3,8 +3,12 @@ name = "linux-crypto"
 version = "0.0.0"
 edition = "2018"
 
+[features]
+rand = ["rand_core"]
+
 [dependencies]
 libc = "0.2"
+rand_core = { version = "0.6", optional = true, features = ["std"] }
 
 [dev-dependencies]
 sha2 = "0.9"

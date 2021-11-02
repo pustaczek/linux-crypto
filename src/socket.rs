@@ -56,6 +56,23 @@ impl Context {
         }
     }
 
+    pub fn set_key(&mut self, key: &[u8]) -> io::Result<()> {
+        let ret = unsafe {
+            libc::setsockopt(
+                self.fd,
+                libc::SOL_ALG,
+                libc::ALG_SET_KEY,
+                key.as_ptr() as *const c_void,
+                key.len() as u32,
+            )
+        };
+        if ret < 0 {
+            Err(io::Error::last_os_error())
+        } else {
+            Ok(())
+        }
+    }
+
     pub fn start(&self) -> io::Result<Operation> {
         let fd = unsafe { libc::accept(self.fd, std::ptr::null_mut(), std::ptr::null_mut()) };
         if fd < 0 {

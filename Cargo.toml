@@ -1,0 +1,10 @@
+[package]
+name = "linux-crypto"
+version = "0.0.0"
+edition = "2018"
+
+[dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+sha2 = "0.9"
